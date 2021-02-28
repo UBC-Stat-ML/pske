@@ -1,0 +1,14 @@
+Package: pske
+Type: Package
+Title: Probabilistic Solutions to Kolmogorov's Equations
+Version: 0.0.1
+Date: 2020-10-18
+Author: Miguel Biron-Lattes, Alexandre Bouchard-Côté, Trevor Campbell
+Maintainer: Miguel Biron-Lattes <miguel.biron@stat.ubc.ca>
+Description: Arbitrary precision solvers of Kolmogorov's equations
+    for Markov jump processes.
+License: MIT
+Imports: Rcpp (>= 1.0.5)
+LinkingTo: Rcpp, RcppEigen, BH
+Encoding: UTF-8
+RoxygenNote: 7.1.1
