@@ -14,6 +14,9 @@ unif_expm = function(Q, K, t_pow=1, eps, sparse){
   r=get_max_rate(Q)
   if(missing(K)) K = unif_auto_tune(Q=Q,t_pow=t_pow,eps=eps,r=r)$K
   if(missing(sparse)) sparse = unif_expm_use_sparse(Q)
+  cost=if(sparse) Matrix::nnzero(Q) else nrow(Q)^2
+  cost=K*nrow(Q)*cost
+  glovars$FLOPS_COUNTER = glovars$FLOPS_COUNTER + cost
   if(sparse){
     return(unif_expm_sparse(Q, K, t_pow, r))
   } else{

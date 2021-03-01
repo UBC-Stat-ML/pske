@@ -14,6 +14,7 @@ skeletoid_expm = function(Q, K, t_pow=1, eps, n_sq = K, sparse){
   if(missing(K)) K = skeletoid_auto_tune(Q = Q,t_pow = t_pow,eps = eps)$K
   if(missing(sparse)) sparse = skeletoid_expm_use_sparse(Q)
   delta = t_pow*(2^(-K)) # size of increment
+  glovars$FLOPS_COUNTER = glovars$FLOPS_COUNTER + K*nrow(Q)^3
   if(sparse)
     return(skeletoid_expm_sparse(Q, delta, n_sq))
   else
