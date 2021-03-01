@@ -10,9 +10,9 @@
 #' @param K precision level. If provided, eps is ignored.
 #' @returns exp(tQ) up to tolerance eps in op-1 norm.
 #' @export
-unif_expm = function(Q, K, t_pow=1, eps, sparse, max_K=120L){
+unif_expm = function(Q, K, t_pow=1, eps, sparse){
   r=get_max_rate(Q)
-  if(missing(K)) K = unif_auto_tune(Q=Q,t_pow=t_pow,eps=eps,max_K=max_K,r=r)$K
+  if(missing(K)) K = unif_auto_tune(Q=Q,t_pow=t_pow,eps=eps,r=r)$K
   if(missing(sparse)) sparse = unif_expm_use_sparse(Q)
   if(sparse){
     return(unif_expm_sparse(Q, K, t_pow, r))
