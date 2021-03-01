@@ -1,5 +1,5 @@
-#include "ProbSKE.hpp"
-#include "ProbSKE.h" // for the dense versions of uniformization
+#include "pske.hpp"
+#include "pske.h" // for the dense versions of uniformization
 #include <boost/math/distributions/poisson.hpp>
 
 /* 

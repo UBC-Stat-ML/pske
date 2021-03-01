@@ -1,4 +1,4 @@
-#include "ProbSKE.h"
+#include "pske.h"
 
 /* .Call() this from R */
 SEXP R_skeletoid_vtexpm_dense(SEXP Q_, SEXP delta_, SEXP v_,

@@ -1,4 +1,4 @@
-#' @useDynLib ProbSKE
+#' @useDynLib pske
 #' @import RcppEigen
 #' @importFrom Rcpp evalCpp
 NULL

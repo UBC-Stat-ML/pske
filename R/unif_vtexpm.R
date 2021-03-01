@@ -36,14 +36,14 @@ unif_vtexpm_use_sparse = function(Q){
 
 # vtexpm sparse case
 unif_vtexpm_sparse = function(Q, K, t_pow, v, r){
-  .Call("R_unif_vtexpm_sparse", PACKAGE = 'ProbSKE',
+  .Call("R_unif_vtexpm_sparse", PACKAGE = 'pske',
         as(Q,"dgCMatrix"), as.double(t_pow), as.double(r), as(v,"dgCMatrix"),
         nrow(Q), as.integer(K))
 }
 
 # vtexpm dense case
 unif_vtexpm_dense = function(Q, K, t_pow, v, r){
-  .Call("R_unif_vtexpm_dense", PACKAGE = 'ProbSKE',
+  .Call("R_unif_vtexpm_dense", PACKAGE = 'pske',
         as.double(Q), as.double(t_pow), as.double(r),
         nrow(v), nrow(Q), as.integer(K), as.double(v))
 }

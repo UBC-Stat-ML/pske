@@ -110,7 +110,7 @@ set_sp_dense = function(A,use_sparse_vec){
 # expm caller
 max_sk_unif_expm_ = function(Q_list,t_pow,r,n,K_u,K_s,un_use_sparse,
                              sk_use_sparse){
-  .Call("R_max_sk_unif_expm",PACKAGE = "ProbSKE",
+  .Call("R_max_sk_unif_expm",PACKAGE = "pske",
         as.double(Q_list$A_de),Q_list$A_sp,as.double(t_pow),as.double(r),
         n, as.integer(K_u),as.integer(K_s), as.logical(un_use_sparse),
         as.logical(sk_use_sparse))
@@ -119,7 +119,7 @@ max_sk_unif_expm_ = function(Q_list,t_pow,r,n,K_u,K_s,un_use_sparse,
 # vtexpm caller
 max_sk_unif_vtexpm_ = function(Q_list,t_pow,r,nr,nc,K_u,K_s,part_K,v_list,
                                un_use_sparse,sk_use_sparse,sk_use_sparse_full){
-  .Call("R_max_sk_unif_vtexpm",PACKAGE = "ProbSKE",
+  .Call("R_max_sk_unif_vtexpm",PACKAGE = "pske",
         Q_list$A_de,Q_list$A_sp,as.double(t_pow),as.double(r),
         nr,nc, as.integer(K_u),as.integer(K_s), part_K$k1, part_K$k2,
         v_list$A_de,v_list$A_sp, as.logical(un_use_sparse),

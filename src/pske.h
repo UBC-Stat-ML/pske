@@ -1,5 +1,5 @@
-#ifndef PROBSKE_H
-#define PROBSKE_H
+#ifndef PSKE_H
+#define PSKE_H
 #ifndef __cplusplus
 #include <R.h>
 #include <Rinternals.h>

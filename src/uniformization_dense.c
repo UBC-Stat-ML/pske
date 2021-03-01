@@ -1,4 +1,4 @@
-#include "ProbSKE.h"
+#include "pske.h"
 
 /* 
  * unif_expm_dense: solution of the Kolmogorov's eq. via uniformization

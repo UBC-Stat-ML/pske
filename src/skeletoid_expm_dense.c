@@ -1,4 +1,4 @@
-#include "ProbSKE.h"
+#include "pske.h"
 
 /*
  *  skeletoid_expm high-precision version, deals with rounding issues when delta ~ 0

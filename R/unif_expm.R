@@ -31,14 +31,14 @@ unif_expm_use_sparse = function(Q){
 
 # expm sparse case
 unif_expm_sparse = function(Q, K, t_pow, r){
-  .Call("R_unif_expm_sparse", PACKAGE = 'ProbSKE',
+  .Call("R_unif_expm_sparse", PACKAGE = 'pske',
         as(Q,"dgCMatrix"), as.double(t_pow), as.double(r), nrow(Q),
         as.integer(K))
 }
 
 # expm dense case
 unif_expm_dense = function(Q, K, t_pow, r){
-  .Call("R_unif_expm_dense", PACKAGE = 'ProbSKE',
+  .Call("R_unif_expm_dense", PACKAGE = 'pske',
         as.double(Q), as.double(t_pow), as.double(r),
         nrow(Q), as.integer(K))
 }

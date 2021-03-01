@@ -49,14 +49,14 @@ skeletoid_vtexpm_use_sparse = function(Q,K,part_K,sp_cost,
 
 # dense case
 skeletoid_vtexpm_dense = function(Q, delta, v, k1, k2){
-  .Call("R_skeletoid_vtexpm_dense", PACKAGE = 'ProbSKE',
+  .Call("R_skeletoid_vtexpm_dense", PACKAGE = 'pske',
         as.double(Q), as.double(delta), as.double(v),
         nrow(v), ncol(Q), as.integer(k1), as.integer(k2))
 }
 
 # sparse case
 skeletoid_vtexpm_sparse = function(Q, delta, v, K, k1, k2, full_sp){
-  .Call('R_skeletoid_vtexpm_sparse', PACKAGE = 'ProbSKE',
+  .Call('R_skeletoid_vtexpm_sparse', PACKAGE = 'pske',
         as(Q,"dgCMatrix"), as.double(delta), as(v,"dgCMatrix"), as.integer(K),
         as.integer(k1), as.integer(k2), as.logical(full_sp))
 }

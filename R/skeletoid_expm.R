@@ -31,12 +31,12 @@ skeletoid_expm_use_sparse = function(Q){
 
 # skeletoid: dense case
 skeletoid_expm_dense = function(Q, delta, n_sq){
-  .Call("R_skeletoid_expm_dense", PACKAGE = 'ProbSKE',
+  .Call("R_skeletoid_expm_dense", PACKAGE = 'pske',
         as.double(Q), as.double(delta), nrow(Q), as.integer(n_sq))
 }
 
 # skeletoid: sparse case
 skeletoid_expm_sparse = function(Q, delta, n_sq){
-  .Call('R_skeletoid_expm_sparse', PACKAGE = 'ProbSKE',
+  .Call('R_skeletoid_expm_sparse', PACKAGE = 'pske',
         as(Q,"dgCMatrix"), as.double(delta), as.integer(n_sq))
 }

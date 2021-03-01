@@ -1,5 +1,5 @@
-#include "ProbSKE.hpp"
-#include "ProbSKE.h" // for matsq
+#include "pske.hpp"
+#include "pske.h" // for matsq
 
 /* 
  * expm functions

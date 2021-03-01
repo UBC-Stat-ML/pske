@@ -1,5 +1,5 @@
-#ifndef PROBSKE_HPP
-#define PROBSKE_HPP
+#ifndef PSKE_HPP
+#define PSKE_HPP
 #include <RcppEigen.h>
 
 using Rcpp::as;

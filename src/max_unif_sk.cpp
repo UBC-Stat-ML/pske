@@ -1,5 +1,5 @@
-#include "ProbSKE.hpp"
-#include "ProbSKE.h" // for the dense versions of the methods
+#include "pske.hpp"
+#include "pske.h" // for the dense versions of the methods
 #include <thread>
 
 /* 

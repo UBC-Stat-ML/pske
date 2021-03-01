@@ -2,7 +2,7 @@ Package: pske
 Type: Package
 Title: Probabilistic Solutions to Kolmogorov's Equations
 Version: 0.0.1
-Date: 2020-10-18
+Date: 2021-02-28
 Author: Miguel Biron-Lattes, Alexandre Bouchard-Côté, Trevor Campbell
 Maintainer: Miguel Biron-Lattes <miguel.biron@stat.ubc.ca>
 Description: Arbitrary precision solvers of Kolmogorov's equations
