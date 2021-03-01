@@ -23,7 +23,7 @@ unif_vtexpm = function(Q, K, t_pow=1, v, eps, sparse, verbose=FALSE){
   if(sparse)
     return(unif_vtexpm_sparse(Q, K, t_pow, v, r))
   else
-    return(unif_vtexpm_dense(as(Q,"matrix"), K, t_pow, as(v,"matrix"), r))
+    return(unif_vtexpm_dense(Q, K, t_pow, v, r))
 }
 
 ###############################################################################
@@ -44,6 +44,6 @@ unif_vtexpm_sparse = function(Q, K, t_pow, v, r){
 # vtexpm dense case
 unif_vtexpm_dense = function(Q, K, t_pow, v, r){
   .Call("R_unif_vtexpm_dense", PACKAGE = 'pske',
-        as.double(Q), as.double(t_pow), as.double(r),
-        nrow(v), nrow(Q), as.integer(K), as.double(v))
+        as(Q,"matrix"), as.double(t_pow), as.double(r), as(v,"matrix"),
+        nrow(Q), as.integer(K))
 }

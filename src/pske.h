@@ -25,18 +25,6 @@ void skeletoid_vtexpm_dense(double *A, double *Q, double delta,
                             double *v, size_t nr, size_t nc, int k1, int k2);
 void mat_mat_prod_loop(double *z, double *x, double *v, int nr, int nc, int k,
                        bool do_init);
-// void vec_mat_prod_loop(double *z, double *x, double *v, int n, int k, bool do_init);
-
-// functions in uniformization_dense.c
-void unif_expm_dense_c(double *E, double *Q, double r, double *a, int n, int K);
-void uniformization_dense_loop(double *P, double *P_pow, double *a, int nr,
-                               int nc, int K, double *E);
-void unif_vtexpm_dense_c(double *E, double *Q, double r, double *a, int nr,
-                         int nc, int K, double *v);
-void set_diagonal(double *A, int n, double a);
-void uniformize_ratemat_dense(double *P, double *Q, double inv_r, int n, 
-                              int inSqr, int ione);
-double min_diag(double *A, int n);
 
 #ifdef __cplusplus
 }

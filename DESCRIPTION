@@ -9,6 +9,6 @@ Description: Arbitrary precision solvers of Kolmogorov's equations
     for Markov jump processes.
 License: MIT
 Imports: Rcpp (>= 1.0.5)
-LinkingTo: Rcpp, RcppEigen, BH
+LinkingTo: Rcpp, RcppEigen
 Encoding: UTF-8
 RoxygenNote: 7.1.1

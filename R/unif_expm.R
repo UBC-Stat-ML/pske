@@ -17,7 +17,7 @@ unif_expm = function(Q, K, t_pow=1, eps, sparse, max_K=120L){
   if(sparse){
     return(unif_expm_sparse(Q, K, t_pow, r))
   } else{
-    return(unif_expm_dense(as(Q,"matrix"), K, t_pow, r))
+    return(unif_expm_dense(Q, K, t_pow, r))
   }
 }
 
@@ -39,6 +39,6 @@ unif_expm_sparse = function(Q, K, t_pow, r){
 # expm dense case
 unif_expm_dense = function(Q, K, t_pow, r){
   .Call("R_unif_expm_dense", PACKAGE = 'pske',
-        as.double(Q), as.double(t_pow), as.double(r),
+        as(Q,"matrix"), as.double(t_pow), as.double(r),
         nrow(Q), as.integer(K))
 }
