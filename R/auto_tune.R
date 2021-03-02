@@ -39,7 +39,7 @@ skeletoid_auto_tune = function(Q, t_pow, eps=1E-7, max_K=glovars$SKEL_MAX_K, r){
 unif_auto_tune = function(Q, t_pow, eps=1E-7, max_K=glovars$UNIF_MAX_K, r){
   if(missing(r)) r = get_max_rate(Q)
   if(eps>1) return(list(K=0L,r=r))
-  eps = max(eps,.Machine$double.eps) # no point in trying to go further than this
+  eps = max(eps,10*.Machine$double.eps) # no point in trying to go further than this (warning: don't set it to .Machine$double.eps otherwise we get Inf in qpois)
   lambda=r*t_pow
   K=as.integer(min(max_K,qpois(p = eps,lambda = lambda,lower.tail = FALSE)))
   return(list(K=K,r=r))
@@ -51,40 +51,3 @@ unif_auto_tune = function(Q, t_pow, eps=1E-7, max_K=glovars$UNIF_MAX_K, r){
 # K=unif_auto_tune(Q,t_pow,eps,max_K = max_K)
 # K
 # stopifnot(K==max_K || ppois(K,lambda = -min(Matrix::diag(Q))*t_pow,lower.tail = FALSE) <= eps)
-
-#######################################
-# old version, unnecessarily complicated by not using quantile function qpois
-#######################################
-
-# unif_auto_tune_root = function(x,lambda,logeps){
-#   ppois(x,lambda = lambda,lower.tail = FALSE,log.p = TRUE)-logeps
-# }
-# 
-# unif_auto_tune = function(Q, t_pow, eps=1E-7, max_K=60L, r,verbose=FALSE){
-#   if(missing(r)) r = get_max_rate(Q)
-#   lambda = r*t_pow
-#   loglambda = log(lambda)
-#   logeps=log(eps)
-#   # look for K<=lambda or K>=lambda?
-#   if(logeps > ppois(lambda,lambda = lambda,lower.tail = FALSE,log.p = TRUE)){
-#     llim = 0
-#     ulim = lambda
-#   }else{ # look for K>=lambda
-#     if(max_K<=lambda) return(list(K=max_K,r=r))
-#     llim = lambda
-#     ulim = max_K
-#   }
-#   interval=c(llim,ulim)
-#   f_lims=unif_auto_tune_root(x=interval,lambda=lambda,logeps=logeps) # f at the lims
-#   K = if(diff(sign(f_lims))==0){
-#     if(verbose) cat("edge solution\n")
-#     interval[which.min(abs(f_lims))]
-#   }else{
-#     if(verbose) cat("inner solution\n")
-#     uniroot(f = unif_auto_tune_root, tol=1,lower = llim, upper = ulim,
-#             f.lower = f_lims[1L], f.upper = f_lims[2L],
-#             lambda=lambda, logeps=logeps)$root
-#   }
-#   K=as.integer(min(ceiling(K),max_K))
-#   return(list(K=K,r=r))
-# }

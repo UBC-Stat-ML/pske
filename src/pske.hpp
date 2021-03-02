@@ -49,8 +49,7 @@ RcppExport SEXP R_unif_vtexpm_sparse(SEXP Q_, SEXP t_pow_, SEXP r_,
                                      SEXP v_, SEXP n_, SEXP K_);
 void unif_sparse(MatrixXd& E, const MapSpMatd& Q, const double t_pow,
                  const double r, const size_t n, const int K);
-void uniformization_loop_sparse(MatrixXd& E, MatrixXd& S,const SpMatd& M,
-                                const double lambda, const int K);
+
 // dense case
 RcppExport SEXP R_unif_expm_dense(SEXP Q_, SEXP t_pow_, SEXP r_, SEXP n_,
                                   SEXP K_);
@@ -58,8 +57,32 @@ RcppExport SEXP R_unif_vtexpm_dense(SEXP Q_, SEXP t_pow_, SEXP r_,
                                     SEXP v_, SEXP n_, SEXP K_);
 void unif_dense(MatrixXd& E, const MapMatd& Q, const double t_pow,
                 const double r, const size_t n, const int K);
-void uniformization_loop_dense(MatrixXd& E, MatrixXd& S,const MatrixXd& M,
-                               const double lambda, const int K);
 
+// templated functions
+// unif loop: uses Alg 1 in Sherlock (2020) for stability at high rates
+// note: templating can be slower (not sure) because an extra copy is made. See
+// https://stackoverflow.com/a/57427407/5443023
+template <typename Derived>
+void uniformization_loop(MatrixXd& E, MatrixXd& S,
+                         const Eigen::EigenBase<Derived>& M_,
+                         const double lambda, const int K){
+  Derived const& M = M_.derived(); // retrieve actual matrix (sparse or dense)
+  double b=S.lpNorm<1>(), c=0.0;
+  const double B = 1e100;
+  if(b>B){ // need to renormalize
+    S = S/b; E = E/b; c += log(b); b=1.0;
+  }
+  for(int k=1; k<=K; k++){ // we already did i=0 when initializing E
+    // std::cout << "k=" << k << ", b="<< b << std::endl;
+    S = S*M/k; // update the product (dense*sparse)
+    b = b*lambda/k; // update norm estimate
+    E = E + S; // accumulate
+    if(b>B){ // need to renormalize
+      S = S/b; E = E/b; c += log(b); b=1.0;
+    }
+  }
+  E = exp(c-lambda)*E; // undo renormalizations
+  return;
+}
 
 #endif
