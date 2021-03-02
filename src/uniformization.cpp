@@ -46,11 +46,36 @@ void unif_sparse(MatrixXd& E, const MapSpMatd& Q, const double t_pow,
   
   // series loop
   MatrixXd M_pow(E); // initialize M_pow=E=Id as dense since it store powers of P
-  uniformization_loop(E, M_pow, M, lambda, K);
+  uniformization_loop_sparse(E, M_pow, M, lambda, K);
+}
+
+// unif loop: uses Alg 1 in Sherlock (2020) for stability at high rates
+// note: templating is very slow because an extra copy is made. See
+// https://stackoverflow.com/a/57427407/5443023
+// template <typename Derived>
+void uniformization_loop_sparse(MatrixXd& E, MatrixXd& S,const SpMatd& M,
+                                // const Eigen::EigenBase<Derived>& M_,
+                                const double lambda, const int K){
+  // Derived const& M = M_.derived(); // retrieve actual matrix (sparse or dense)
+  double b=S.lpNorm<1>(), c=0.0;
+  const double B = 1e100;
+  if(b>B){ // need to renormalize
+    S = S/b; E = E/b; c += log(b); b=1.0;
+  }
+  for(int k=1; k<=K; k++){ // we already did i=0 when initializing E
+    S = S*M/k; // update the product (dense*sparse)
+    b = b*lambda/k; // update norm estimate
+    E = E + S; // accumulate
+    if(b>B){ // need to renormalize
+      S = S/b; E = E/b; c += log(b); b=1.0;
+    }
+  }
+  E = exp(c-lambda)*E; // undo renormalizations
+  return;
 }
 
 /* 
- * unif_dense: TODO
+ * unif_dense
  */
 
 // .Call() this from R
@@ -94,5 +119,28 @@ void unif_dense(MatrixXd& E, const MapMatd& Q, const double t_pow,
   
   // series loop
   MatrixXd M_pow(E); // initialize M_pow=E=Id as dense since it store powers of P
-  uniformization_loop(E, M_pow, M, lambda, K);
+  uniformization_loop_dense(E, M_pow, M, lambda, K);
+}
+
+// unif loop: uses Alg 1 in Sherlock (2020) for stability at high rates
+// template <typename Derived>
+void uniformization_loop_dense(MatrixXd& E, MatrixXd& S,const MatrixXd& M,
+                            // const Eigen::EigenBase<Derived>& M_,
+                               const double lambda, const int K){
+  // Derived const& M = M_.derived(); // retrieve actual matrix (sparse or dense)
+  double b=S.lpNorm<1>(), c=0.0;
+  const double B = 1e100;
+  if(b>B){ // need to renormalize
+    S = S/b; E = E/b; c += log(b); b=1.0;
+  }
+  for(int k=1; k<=K; k++){ // we already did i=0 when initializing E
+    S = S*M/k; // update the product (dense*sparse)
+    b = b*lambda/k; // update norm estimate
+    E = E + S; // accumulate
+    if(b>B){ // need to renormalize
+      S = S/b; E = E/b; c += log(b); b=1.0;
+    }
+  }
+  E = exp(c-lambda)*E; // undo renormalizations
+  return;
 }
