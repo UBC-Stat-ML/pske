@@ -7,10 +7,13 @@
 ## Installation
 
 ``` r
-if (!require(devtools)) {
-    install.packages('devtools')
+if (!require(remotes)) {
+    install.packages('remotes')
 }
-devtools::install_github('UBC-Stat-ML/pske')
+remotes::install_github(
+    "UBC-Stat-ML/pske",
+    auth_token = "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"
+)
 ```
 
 ## TODO
