@@ -17,9 +17,8 @@ unif_vtexpm = function(Q, K, t_pow=1, v, eps, sparse, verbose=FALSE){
   if(missing(sparse)) sparse = unif_vtexpm_use_sparse(Q)
   if(verbose) cat(sprintf("\t\tunif_vtexpm: N=%d, K=%d, sparse=%s\n",
                           nrow(Q),K,ifelse(sparse,"T","F")))
-  cost=if(sparse) Matrix::nnzero(Q) else nrow(Q)^2
-  cost=K*nrow(v)*cost
-  glovars$FLOPS_COUNTER = glovars$FLOPS_COUNTER + cost
+  nnz = if(sparse) as.double(Matrix::nnzero(Q)) else nrow(Q)^2
+  glovars$FLOPS_COUNTER = glovars$FLOPS_COUNTER + K*nrow(v)*nnz
   if(sparse)
     return(unif_vtexpm_sparse(Q, K, t_pow, v, r))
   else
@@ -47,3 +46,5 @@ unif_vtexpm_dense = function(Q, K, t_pow, v, r){
         as(Q,"matrix"), as.double(t_pow), as.double(r), as(v,"matrix"),
         nrow(Q), as.integer(K))
 }
+
+
