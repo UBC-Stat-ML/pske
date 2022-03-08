@@ -4,7 +4,7 @@
 \alias{unif_expm}
 \title{Uniformization}
 \usage{
-unif_expm(Q, K, t_pow = 1, eps, sparse, max_K = 120L)
+unif_expm(Q, K, t_pow = 1, eps, sparse)
 }
 \arguments{
 \item{Q}{rate matrix.}

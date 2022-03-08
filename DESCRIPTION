@@ -11,4 +11,4 @@ License: MIT
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp, RcppEigen
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
