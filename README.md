@@ -10,10 +10,7 @@
 if (!require(remotes)) {
     install.packages('remotes')
 }
-remotes::install_github(
-    "UBC-Stat-ML/pske",
-    auth_token = "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"
-)
+remotes::install_github("UBC-Stat-ML/pske")
 ```
 
 ## TODO
