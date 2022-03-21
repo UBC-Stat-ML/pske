@@ -1,4 +1,8 @@
+#define USE_FC_LEN_T
 #include "pske.h"
+#ifndef FCONE
+# define FCONE
+#endif
 
 /*
  *  skeletoid_expm high-precision version, deals with rounding issues when delta ~ 0

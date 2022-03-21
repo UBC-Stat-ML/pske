@@ -1,4 +1,8 @@
+#define USE_FC_LEN_T
 #include "pske.h"
+#ifndef FCONE
+# define FCONE
+#endif
 
 /* .Call() this from R */
 SEXP R_skeletoid_vtexpm_dense(SEXP Q_, SEXP delta_, SEXP v_,
