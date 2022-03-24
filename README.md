@@ -13,7 +13,7 @@
 Linux systems usually ship with such tools, but macOS and Windows users might require additional setup:
 
 - Windows: install the [Rtools toolchain](https://cran.r-project.org/bin/windows/Rtools/).
-- macOS: Follow [these instructions](https://github.com/rmacoslib/r-macos-rtools#how-do-i-use-the-installer) to configure the toolchain.
+- macOS: Follow [these instructions](https://mac.r-project.org/tools/) to configure the toolchain.
 
 
 
