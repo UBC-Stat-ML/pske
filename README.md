@@ -8,10 +8,13 @@
 
 ### Step 1: system dependencies
 
-Building the underlying C/C++ code requires a working C++11 toolchain. Linux systems usually ship with such tools, but macOS and Windows users might require additional setup:
+#### A working C/C++/Fortran toolchain
+
+Linux systems usually ship with such tools, but macOS and Windows users might require additional setup:
 
 - Windows: install the [Rtools toolchain](https://cran.r-project.org/bin/windows/Rtools/).
-- macOS: Follow [these instructions](https://github.com/rmacoslib/r-macos-rtools#how-do-i-use-the-installer) to configure the C toolchain.
+- macOS: Follow [these instructions](https://github.com/rmacoslib/r-macos-rtools#how-do-i-use-the-installer) to configure the toolchain.
+
 
 
 ### Step 2: install `pske`
@@ -27,3 +30,5 @@ remotes::install_github("UBC-Stat-ML/pske")
 
 - Basic parameter checking to avoid crashing R session by passing wrong things to C code
 - More solvers
+
+
